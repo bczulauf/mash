@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="styles/style.css">
+</head>
+<body>
+  <div>
+    <div id="content" data-bind="foreach: users">
+      <div class="user-profile" data-bind="css: status, style: {'background-image': photo}"></div>
+    </div>
+  </div>
+  <script src="lib/jquery.js"></script>
+  <script src="lib/knockout.js"></script>
+  <script src="scripts/mash.js"></script>
+</body>
+</html>

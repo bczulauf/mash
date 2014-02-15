@@ -1,0 +1,20 @@
+{
+  "name": "mash",
+  "version": "0.0.0",
+  "description": "A new dating site",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bczulauf/mash.git"
+  },
+  "author": "Ben Zulauf",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "gitHead": "4a2e3e87f36a017b9f870c328d31804532c4e1c1",
+  "bugs": {
+    "url": "https://github.com/bczulauf/mash/issues"
+  }
+}
