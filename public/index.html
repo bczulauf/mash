@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+  <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="styles/style.css">
 </head>
 <body>
-  <div>
-    <div id="content" data-bind="foreach: users">
-      <div class="user-profile" data-bind="css: status, style: {'background-image': photo}"></div>
+  <div class="container">
+    <header class="clearfix">
+      <div id="logo">mash</div>
+      <div id="account" class="cta lg-cta photo" style="background-image: url('/images/elia.jpg')">
+        <div id="alert" class="cta sm-cta">2</div>
+      </div>
+      <div id="status">
+        <div id="status-text" class="text-single">Single</div>
+        <div id="status-button"></div>
+      </div>
+    </header>
+    <div id="content">
+      <div data-bind="foreach: views">
+         <a href="#" data-bind="text: templateName, click: $root.selectedView"></a>&nbsp;
+      </div>
+      <div data-bind="with: selectedView">
+        <div data-bind="template: { name: templateName, data: data }"></div>
+      </div>
     </div>
   </div>
+  <script id="userTemplate" type="text/html">
+    <div id="user-instruction" class="instruction">Click two friends to propose a date</div>
+    <div data-bind="foreach: users">
+      <div class="user-profile photo" data-bind="click: $parent.match, css: status, style: {'background-image': photo}">
+      </div>
+    </div>
+  </script>
+
+  <script id="proposalTemplate" type="text/html">
+    <div id="proposal-instruction" class="instruction">Propose a date between</div>
+    <textarea data-bind="text: message"></textarea>
+  </script>
   <script src="lib/jquery.js"></script>
   <script src="lib/knockout.js"></script>
   <script src="scripts/mash.js"></script>

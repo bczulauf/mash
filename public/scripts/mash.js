@@ -1,35 +1,57 @@
-function User(firstname, lastname, status, photo) {
-	this.firstname = firstname;
-	this.lastname = lastname;
-	this.status = status;
-	this.photo = "url(images/" + photo + ")";
-}
+// //Date Model
+// function DateModel(createdAt, dateTime, place, participants, acceptCount) {
+// 	this.createdAt = createdAt;
+// 	this.dateTime = dateTime;
+// 	this.place = place;
+// 	this.participants = participants;
+// 	this.acceptCount = acceptCount;
+// }
 
-function UsersModel() {
-  var self = this;
-	self.users = ko.observableArray();
+function View(templateName, data) {
+  this.templateName = templateName;
+  this.data = data;
+};
 
-	self.addUser = function() {
-		self.users.push({
-			firstname: "",
-			lastname: ""
-		});
-  };
+var proposalModel = {
+  participants: [],
+  time: new Date(),
+  location: "Seattle",
+  message: ko.observable("You should go on this date!")
+};
 
-	self.removeUser = function(user) {
-		self.users.remove(user);
-	};
+var usersModel = {
+	users: ko.observableArray()
+};
 
+var viewModel = {
+  views: ko.observableArray([
+    new View("userTemplate", usersModel),
+    new View("proposalTemplate", proposalModel)
+    ]),
+  selectedView: ko.observable()    
 };
 
 $(function () {
-	var usersModel = new UsersModel();
-
-	$.get("/friends", function (data) {
-		$.each(data, function(key, value) {
-		  usersModel.users.push(new User(value.firstname, value.lastname, value.status, value.photo));
-		});
+	$.get('/friends', function(data) {
+		usersModel.users = ko.observableArray(data.friends);
+		viewModel.selectedView(new View("userTemplate", usersModel));
 	});
 
-  ko.applyBindings(usersModel, document.getElementById("content")); 
+  ko.applyBindings(viewModel, document.getElementById('content'));
 });
+
+//maybe i put this in the viewModel because it will be used to navigate
+//between views and to change the selectedView context
+// 	self.dateHolder = [];
+// 	self.match = function(user) {
+// 		if (self.dateHolder.length === 0) {
+//       console.log("first to be asked");
+//       self.dateHolder.push(user);
+// 		} else if (self.dateHolder[0] === user){
+//       self.dateHolder.pop();
+// 		} else {
+// 			var dateModel = new DateModel(new Date(), "Wed, March 5 at 7pm", "1335 Filbert Street", [], []);
+// 			var dateProposalUI = new DateProposalUI(dateModel); 
+// 		}
+// 	}
+// }

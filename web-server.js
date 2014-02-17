@@ -8,10 +8,10 @@ app.configure(function () {
 	app.use(express.static(__dirname + '/public'));
 })
 
-var data = [
-	{"firstname": "Elia", "lastname": "Mrak", "status": "single", "photo": "elia.jpg" },
-	{"firstname": "Eva", "lastname": "Mrak", "status": "single", "photo": "eva.jpg" }
-]
+var data = {
+	friends: [{"name": "Elia", "status": "taken", "photo": "url(images/elia.jpg)", "dates": "[{date: yes}]" },
+	{"name": "Eva", "status": "single", "photo": "url(images/eva.jpg)", "dates": "[{date: yes}]" }]
+}
 
 app.get('/friends', function (req, res) {
   res.send(data);
